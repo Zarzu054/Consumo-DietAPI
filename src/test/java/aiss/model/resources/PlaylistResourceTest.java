@@ -27,7 +27,8 @@ public class PlaylistResourceTest {
 		
 	
 		song = sr.addSong(new Song("Test title","Test artist","Test album","2016"));
-		plr.addSong(playlist.getId(), song.getId());
+		if(song!=null)
+			plr.addSong(playlist.getId(), song.getId());
 	}
 
 	@AfterClass
@@ -35,7 +36,8 @@ public class PlaylistResourceTest {
 		plr.deletePlaylist(playlist.getId());
 		plr.deletePlaylist(playlist3.getId());
 		plr.deletePlaylist(playlist4.getId());
-		sr.deleteSong(song.getId());
+		if(song!=null)
+			sr.deleteSong(song.getId());
 	}
 
 	@Test
@@ -105,8 +107,10 @@ public class PlaylistResourceTest {
 
 	@Test
 	public void testAddSong() {
-		boolean success = plr.addSong(playlist3.getId(), song.getId());
-		assertTrue("Error when adding the song", success);
+		if(song!=null) {
+			boolean success = plr.addSong(playlist3.getId(), song.getId());
+			assertTrue("Error when adding the song", success);
+		}
 	}
 
 	@Test
