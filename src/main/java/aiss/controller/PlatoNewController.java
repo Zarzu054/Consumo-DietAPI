@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.Song;
-import aiss.model.resources.PlaylistResource;
-import aiss.model.resources.SongResource;
+import aiss.model.Plato;
+import aiss.model.resources.DietaResource;
+import aiss.model.resources.PlatoResource;
 
 
 /**
  * Servlet implementation class ContactNewController
  */
-public class SongNewController extends HttpServlet {
+public class PlatoNewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private static final Logger log = Logger.getLogger(SongUpdateController.class.getName());
+	private static final Logger log = Logger.getLogger(PlatoUpdateController.class.getName());
 	
-    public SongNewController() {
+    public PlatoNewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +34,22 @@ public class SongNewController extends HttpServlet {
 		String title = request.getParameter("title");
 		String album = request.getParameter("album");
 		String year = request.getParameter("year");
-		String playlistId = request.getParameter("playlistId");
+		String DietaId = request.getParameter("DietaId");
 		
-		// Create song
-		SongResource sr = new SongResource();
-		Song song = sr.addSong(new Song(title, artist, album, year));
+		// Create Plato
+		PlatoResource sr = new PlatoResource();
+		Plato Plato = sr.addPlato(new Plato(title, artist, album, year));
 		
-		// Add song to the playlist
-		PlaylistResource plr = new PlaylistResource();
-		plr.addSong(playlistId, song.getId());
+		// Add Plato to the Dieta
+		DietaResource plr = new DietaResource();
+		plr.addPlato(DietaId, Plato.getId());
 
 		// Log
-		log.log(Level.FINE, "New song request. artist=" + artist + ", title= " + title + ", album= " + album + ", year= " + year +". Forwarding to playlist list view.");
+		log.log(Level.FINE, "New Plato request. artist=" + artist + ", title= " + title + ", album= " + album + ", year= " + year +". Forwarding to Dieta list view.");
 
 		// Forward to contact list view
-		request.setAttribute("message", "Song created successfully");
-		request.setAttribute("playlistId", playlistId);
+		request.setAttribute("message", "Plato created successfully");
+		request.setAttribute("DietaId", DietaId);
 		request.getRequestDispatcher("/list").forward(request, response);
 		
 	}

@@ -1,46 +1,46 @@
 package aiss.model.resources;
 
-import java.util.Arrays;
+import java.util.Arrays; 
 import java.util.Collection;
 
 import org.restlet.data.MediaType;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
-import aiss.model.Playlist;
+import aiss.model.Dieta;
 
-public class PlaylistResource {
+public class DietaResource {
 
-	private String uri = "http://playlist-api.appspot.com/api/lists";
+	private String uri = "http://Dieta-api.appspot.com/api/lists";
 	//private String uri = "http://localhost:8095/api/lists";
 	
 
-	public Collection<Playlist> getAll() {
+	public Collection<Dieta> getAll() {
 		
 		ClientResource cr = null;
-		Playlist [] lists = null;
+		Dieta[] lists = null;
 		try {
 			cr = new ClientResource(uri);
-			lists = cr.get(Playlist[].class);
+			lists = cr.get(Dieta[].class);
 			
 		} catch (ResourceException re) {
-			System.err.println("Error when retrieving the collections of playlists: " + cr.getResponse().getStatus());
+			System.err.println("Error when retrieving the collections of Dietas: " + cr.getResponse().getStatus());
 		}
 		
 		return Arrays.asList(lists);
 	}
 	
 	
-	public Playlist getPlaylist(String playlistId) {
+	public Dieta getDieta(String DietaId) {
 		
 		ClientResource cr = null;
-		Playlist list = null;
+		Dieta list = null;
 		try {
-			cr = new ClientResource(uri + "/" + playlistId);
-			list = cr.get(Playlist.class);
+			cr = new ClientResource(uri + "/" + DietaId);
+			list = cr.get(Dieta.class);
 			
 		} catch (ResourceException re) {
-			System.err.println("Error when retrieving the playlist: " + cr.getResponse().getStatus());
+			System.err.println("Error when retrieving the Dieta: " + cr.getResponse().getStatus());
 		}
 		
 		return list;
@@ -48,24 +48,24 @@ public class PlaylistResource {
 	}
 	
 
-	public Playlist addPlaylist(Playlist pl) {
+	public Dieta addDieta(Dieta pl) {
 		
 		ClientResource cr = null;
-		Playlist resultPlaylist = null;
+		Dieta resultDieta = null;
 		try {
 			cr = new ClientResource(uri);
 			cr.setEntityBuffering(true);		// Needed for using RESTlet from JUnit tests
-			resultPlaylist = cr.post(pl,Playlist.class);
+			resultDieta = cr.post(pl,Dieta.class);
 			
 		} catch (ResourceException re) {
-			System.err.println("Error when adding the playlist: " + cr.getResponse().getStatus());
+			System.err.println("Error when adding the Dieta: " + cr.getResponse().getStatus());
 		}
 		
-		return resultPlaylist;
+		return resultDieta;
 	}
 	
 
-	public boolean updatePlaylist(Playlist pl) {
+	public boolean updateDieta(Dieta pl) {
 		ClientResource cr = null;
 		boolean success = true;
 		try {
@@ -75,7 +75,7 @@ public class PlaylistResource {
 			
 			
 		} catch (ResourceException re) {
-			System.err.println("Error when updating the playlist: " + cr.getResponse().getStatus());
+			System.err.println("Error when updating the Dieta: " + cr.getResponse().getStatus());
 			success = false;
 		}
 		
@@ -83,30 +83,30 @@ public class PlaylistResource {
 	}
 	
 	
-	public boolean deletePlaylist(String playlistId) {
+	public boolean deleteDieta(String DietaId) {
 		ClientResource cr = null;
 		boolean success = true;
 		try {
-			cr = new ClientResource(uri + "/" + playlistId);
+			cr = new ClientResource(uri + "/" + DietaId);
 			cr.setEntityBuffering(true);		// Needed for using RESTlet from JUnit tests
 			cr.delete();
 			
 		} catch (ResourceException re) {
-			System.err.println("Error when deleting the playlist: " + cr.getResponse().getStatus());
+			System.err.println("Error when deleting the Dieta: " + cr.getResponse().getStatus());
 			success = false;
 		}
 		
 		return success;
 	}
 	
-	public boolean addSong(String playlistId, String songId) {
+	public boolean addPlato(String DietaId, String PlatoId) {
 		// TODO
 		// Use	cr.post(" ") to avoid RESTlet crashing
 		return false;
 		
 	}
 	
-	public boolean removeSong(String playlistId, String songId) {
+	public boolean removePlato(String DietaId, String PlatoId) {
 		// TODO
 		return false;
 	}

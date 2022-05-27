@@ -13,7 +13,7 @@ import aiss.model.Song;
 public class SongResourceTest {
 
 	static Song song1, song2, song3;
-	static SongResource sr = new SongResource();
+	static PlatoResource sr = new PlatoResource();
 	
 	@BeforeClass
 	public static void setup() throws Exception {

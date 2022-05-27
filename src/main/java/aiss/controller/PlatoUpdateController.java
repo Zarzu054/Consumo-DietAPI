@@ -11,70 +11,70 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.Playlist;
-import aiss.model.Song;
-import aiss.model.resources.SongResource;
+import aiss.model.Dieta;
+import aiss.model.Plato;
+import aiss.model.resources.PlatoResource;
 
 
 /**
  * Servlet implementation class DeleteContactController
  */
-public class SongUpdateController extends HttpServlet {
+public class PlatoUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = Logger.getLogger(SongUpdateController.class.getName());
+	private static final Logger log = Logger.getLogger(PlatoUpdateController.class.getName());
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SongUpdateController() {
+	public PlatoUpdateController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Request data
-		String songId = request.getParameter("songId");
-		String playlistId = request.getParameter("playlistId");
+		String PlatoId = request.getParameter("PlatoId");
+		String DietaId = request.getParameter("DietaId");
 		String operation = request.getParameter("operation");
 		
-		// Song resource
-		SongResource sr = new SongResource();
+		// Plato resource
+		PlatoResource sr = new PlatoResource();
 
-		// Load song being updated
-		Song song = sr.getSong(songId);
+		// Load Plato being updated
+		Plato Plato = sr.getPlato(PlatoId);
 
-		// Display update form with song data on it
+		// Display update form with Plato data on it
 		if (operation == null) {
 
 			// Log
-			log.log(Level.FINE, "Update request for contact with id " + songId + " (name=" + song.getTitle() + "). Forwarding to edit view.");
+			log.log(Level.FINE, "Update request for contact with id " + PlatoId + " (name=" + Plato.getTitle() + "). Forwarding to edit view.");
 
 			// Forward to edit view
-			RequestDispatcher rd = request.getRequestDispatcher("/songEditView.jsp?playlistId=" + playlistId);
-			request.setAttribute("song", song);
+			RequestDispatcher rd = request.getRequestDispatcher("/PlatoEditView.jsp?DietaId=" + DietaId);
+			request.setAttribute("Plato", Plato);
 			rd.forward(request, response);
 
 		} else {			
 			
-			// Update song
+			// Update Plato
 			String artist = request.getParameter("artist");
 			String title = request.getParameter("title");
 			String album = request.getParameter("album");
 			String year = request.getParameter("year");
 			
-			song.setArtist(artist);
-			song.setTitle(title);
-			song.setAlbum(album);
-			song.setYear(year);
+			Plato.setArtist(artist);
+			Plato.setTitle(title);
+			Plato.setAlbum(album);
+			Plato.setYear(year);
 			
-			sr.updateSong(song);
+			sr.updatePlato(Plato);
 			
 			// Log
-			log.log(Level.FINE, "Update request. Artist=" + song.getArtist() + ", Title= " + song.getTitle() + ", Album= " + song.getAlbum() + ", Year= " + song.getYear() + ". Forwarding to contact list view.");
+			log.log(Level.FINE, "Update request. Artist=" + Plato.getArtist() + ", Title= " + Plato.getTitle() + ", Album= " + Plato.getAlbum() + ", Year= " + Plato.getYear() + ". Forwarding to contact list view.");
 
-			// Forward to song list view
-			request.setAttribute("message", "Song updated successfully");
+			// Forward to Plato list view
+			request.setAttribute("message", "Plato updated successfully");
 			request.getRequestDispatcher("/list").forward(request, response);
 				
 		}

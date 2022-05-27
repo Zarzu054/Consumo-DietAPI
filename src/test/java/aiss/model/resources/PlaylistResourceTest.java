@@ -16,7 +16,7 @@ public class PlaylistResourceTest {
 	static Playlist playlist, playlist2, playlist3, playlist4;
 	static Song song;
 	static PlaylistResource plr = new PlaylistResource();
-	static SongResource sr = new SongResource();
+	static PlatoResource sr = new PlatoResource();
 	
 	@BeforeClass
 	public static void setUp() throws Exception {

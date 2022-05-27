@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.resources.PlaylistResource;
+import aiss.model.resources.DietaResource;
 
 /**
- * Servlet implementation class PlaylistAddSongController
+ * Servlet implementation class DietaAddPlatoController
  */
-public class PlaylistAddSongController extends HttpServlet {
+public class DietaAddPlatoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(PlaylistAddSongController.class.getName());
+	private static final Logger log = Logger.getLogger(DietaAddPlatoController.class.getName());
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlaylistAddSongController() {
+    public DietaAddPlatoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +31,24 @@ public class PlaylistAddSongController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		// Request data
-		String songId = request.getParameter("songId");
-		String playlistId = request.getParameter("playlistId");
+		String PlatoId = request.getParameter("PlatoId");
+		String DietaId = request.getParameter("DietaId");
 				
-		// Add song to playlist
-		PlaylistResource plr = new PlaylistResource();
-		boolean success = plr.addSong(playlistId, songId);
+		// Add Plato to Dieta
+		DietaResource plr = new DietaResource();
+		boolean success = plr.addPlato(DietaId, PlatoId);
 		
 		if (success) {
-			request.setAttribute("message", "Song added successfully");
-			log.log(Level.FINE, "Song with id=" + songId + " added to playlist with id=" + playlistId + ". Forwarding to playlist list view.");
+			request.setAttribute("message", "Plato added successfully");
+			log.log(Level.FINE, "Plato with id=" + PlatoId + " added to Dieta with id=" + DietaId + ". Forwarding to Dieta list view.");
 		}
 		else {
-			request.setAttribute("message", "The song could not be added");
-			log.log(Level.FINE, "The song with id=" + songId + " could not be added to the playlist with id=" + playlistId + ". Perhaps it is duplicated. Forwarding to playlist list view.");
+			request.setAttribute("message", "The Plato could not be added");
+			log.log(Level.FINE, "The Plato with id=" + PlatoId + " could not be added to the Dieta with id=" + DietaId + ". Perhaps it is duplicated. Forwarding to Dieta list view.");
 		}
 		
 		// Forward to contact list view
-		request.getRequestDispatcher("/list?playlistId=" + playlistId).forward(request, response);
+		request.getRequestDispatcher("/list?DietaId=" + DietaId).forward(request, response);
 	}
 
 	/**

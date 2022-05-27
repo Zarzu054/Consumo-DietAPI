@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.Playlist;
-import aiss.model.resources.PlaylistResource;
+import aiss.model.Dieta;
+import aiss.model.resources.DietaResource;
 
 /**
- * Servlet implementation class PlaylistNewController
+ * Servlet implementation class DietaNewController
  */
-public class PlaylistNewController extends HttpServlet {
+public class DietaNewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(PlaylistNewController.class.getName());
+	private static final Logger log = Logger.getLogger(DietaNewController.class.getName());
        
 
 	/**
@@ -28,16 +28,16 @@ public class PlaylistNewController extends HttpServlet {
 		// Request data
 		String name = request.getParameter("name");
 
-		// Add playlist
-		PlaylistResource plr = new PlaylistResource();
-		Playlist playlist = plr.addPlaylist(new Playlist(name));
+		// Add Dieta
+		DietaResource plr = new DietaResource();
+		Dieta Dieta = plr.addDieta(new Dieta());
 
 		// Log
-		log.log(Level.FINE, "New playlist request. name=" + name + ". Forwarding to playlist list view.");
+		log.log(Level.FINE, "New Dieta request. name=" + name + ". Forwarding to Dieta list view.");
 
 		// Forward to contact list view
-		request.setAttribute("message", "Playlist created successfully");
-		request.getRequestDispatcher("/list?playlistId=" + playlist.getId()).forward(request, response);
+		request.setAttribute("message", "Dieta created successfully");
+		request.getRequestDispatcher("/list?DietaId=" + Dieta.getId()).forward(request, response);
 	}
 
 	/**
